@@ -1,5 +1,6 @@
 body {
   padding-left:     10px;
+  background:       #f1f1f1 url('img/bg.png') repeat top left;
 }
 
 h3 {

@@ -44,31 +44,20 @@ angular.module('ng.puppa',[])
     restrict: 'A',
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl) {
-      // debugger;
-      var validateFn, validateExpr = scope.$eval(attrs.ngPuppa);
+      var objExpr = '', 
+          validateExpr = scope.$eval(attrs.ngPuppa),
+          opts = scope.ngPuppaOpts || attrs.ngPuppaOpts ||
+                 {opr: '||', ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'};
 
-      if (!validateExpr){ return;}
+      if (!validateExpr) return;
 
-      if (angular.isString(validateExpr)) {
-        validateExpr = { validatorAsync: validateExpr };
-      }
-
-      angular.forEach(validateExpr, function (exprssn, key) {
-        validateFn = function(modelValue, viewValue) {
-          // $value is left for ease of use
-          var expression = scope.$eval(exprssn, {
-            '$value': modelValue,
-            '$modelValue': modelValue,
-            '$viewValue': viewValue,
-            '$name': ctrl.$name
-          });
-          // Check if it's a promise
-          if (angular.isObject(expression) && angular.isFunction(expression.then)) {
-            return expression;
-          }
-        };
-        ctrl.$asyncValidators[key] = validateFn;
+      angular.forEach(validateExpr, function (expr, key) {
+        var conditions = validateExpr.length - 1;
+        objExpr += expr+' ';
+        if (key < conditions) objExpr += opts.opr+' ';
       });
+
+      return scope.$eval(!objExpr ? validateExpr : objExpr);
     }
   };
   });

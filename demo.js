@@ -3,15 +3,16 @@
 		.controller('responseController', function($scope) {
       $scope.responces = ['warning', 'angry', 'explosive'];
       $scope.selectedResp = $scope.responces[1];
-
-      $scope.setResponse = function(selectedItem) {
-      };
     })
 
     .controller('directiveController', function($scope) {
-      $scope.valid = true;
-
-      $scope.sayPuppa = function() {
+      $scope.valid = null;
+      $scope.ngPuppaOpts = {
+        opr: '&&',
+        ok: 'tpl/ok.tpl',
+        notOk: 'tpl/notOk.tpl',
+        soundOk: 'sounds/ok.mp3',
+        soundNotOk: 'sounds/notOk.mp3'
       };
     });
 })();
