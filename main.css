@@ -1,0 +1,42 @@
+body {
+  padding-left: 10px;
+}
+
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: x-large;
+}
+
+div #set-response {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+div #set-response span {
+  margin-left: 20px;
+  font-size:   larger;
+  font-style:  italic;
+  font-family: sans-serif;
+}
+
+div #set-response select {
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+div #action input {
+  font-size: 16px;
+  margin-left: 20px;
+  margin-right: 5px;
+  padding-left: 5px;
+}
+
+div #action button {
+  border: solid #000 2px;
+  background-color: transparent;
+  font-size: 18px;
+  font-style: oblique;
+  font-family: monospace;
+}
+
+/*http://www.cssfontstack.com/monospace*/

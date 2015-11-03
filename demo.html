@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS ng-p.u.pp.a</title>
+
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+  <script src="ng-puppa.js"></script>
+  <script src="demo.js"></script>
+</head>
+<body>
+  <div ng-app="demo">
+    <div ng-controller="responseController">
+      <h3>Set a response and try to submit something.</h3>
+      <div id="set-response">
+        <span>Response:</span>
+        <select ng-model="selectedResp"
+                ng-change="setResponse(selectedResp)"
+                ng-options="resp for resp in responces">
+      </select>
+      </div>
+    </div>
+
+    <div id="action" ng-controller="directiveController">
+      <input type="text" value="I want to be rich." />
+      <button id="submit" ng-model="valid" ng-puppa="false" ng-click="sayPuppa()">Submit</button>
+    </div>
+  </div>
+</body>
+</html>
