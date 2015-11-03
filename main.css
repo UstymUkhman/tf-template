@@ -1,42 +1,41 @@
 body {
-  padding-left: 10px;
+  padding-left:     10px;
 }
 
 h3 {
-  font-family: 'Roboto', sans-serif;
-  font-size: x-large;
+  font-size:        x-large;
+  font-family:      'Roboto', sans-serif;
 }
 
 div #set-response {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top:       20px;
+  margin-bottom:    20px;
 }
 
 div #set-response span {
-  margin-left: 20px;
-  font-size:   larger;
-  font-style:  italic;
-  font-family: sans-serif;
+  margin-left:      20px;
+  font-size:        larger;
+  font-style:       italic;
+  font-family:      sans-serif;
 }
 
 div #set-response select {
-  font-size: 15px;
-  margin-left: 10px;
+  font-size:        15px;
+  margin-left:      10px;
 }
 
 div #action input {
-  font-size: 16px;
-  margin-left: 20px;
-  margin-right: 5px;
-  padding-left: 5px;
+  margin-right:     5px;
+  padding-left:     5px;
+  font-size:        16px;
+  margin-left:      20px;
+  font-variant:     small-caps;
 }
 
 div #action button {
-  border: solid #000 2px;
+  font-size:        18px;
+  font-style:       oblique;
+  font-family:      monospace;
   background-color: transparent;
-  font-size: 18px;
-  font-style: oblique;
-  font-family: monospace;
+  border:           solid #000 2px;
 }
-
-/*http://www.cssfontstack.com/monospace*/
