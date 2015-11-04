@@ -42,10 +42,11 @@ angular.module('ng.puppa',[])
 
     return {
       restrict: 'A',
-      require: 'ngModel',
       link: function(scope, elm, attrs, ctrl) {
         var objExpr = '',
-            validateExpr = attrs.ngPuppa,
+            validateExpr = (attrs.ngPuppa === '')
+                         ? attrs.ngPuppa
+                         : scope.$eval(attrs.ngPuppa),
 
             opts = scope.ngPuppaOpts || scope.$eval(attrs.ngPuppaOpts) ||
                    {opr: '||', ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'},
@@ -70,7 +71,6 @@ angular.module('ng.puppa',[])
             };
 
         if (validateExpr === '') return;
-        validateExpr = scope.$eval(validateExpr);
         if (typeof opts.opr !== 'string') opts.opr = '||';
 
         angular.forEach(validateExpr, function (expr, key) {

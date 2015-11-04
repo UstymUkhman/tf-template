@@ -6,25 +6,25 @@
     })
 
     .controller('directiveController', function($scope) {
-      $scope.submit = document.getElementById('submit');
-      $scope.valid = null;
-      $scope.ngPuppaOpts = {
-        opr: '||',
-        ok: 'tpl/ok.tpl',
-        notOk: 'tpl/notOk.tpl',
-        soundOk: 'sounds/ok.mp3',
-        soundNotOk: 'sounds/notOk.mp3'
-      };
+      $scope.valid    = null;
+      $scope.validate = ''; // [false, true, $scope.valid];
+      $scope.submit   = document.getElementById('submit');
 
       $scope.validateToPuppa = function() {
-        var ngPuppa = [false, true, $scope.valid];
-
         var el = angular.element($scope.submit);
-        $scope = el.scope();
+        $s = el.scope();
         $injector = el.injector();
-        $injector.invoke(function($compile) {          
-          el[0].attributes['ng-puppa'].value = true;
-          $compile(el)($scope);
+        $injector.invoke(function($compile) {
+          $s.validate = [false, true, $scope.valid];
+          $scope.ngPuppaOpts = {
+            opr: '&&',
+            ok: 'tpl/ok.tpl',
+            notOk: 'tpl/notOk.tpl',
+            soundOk: 'sounds/ok.mp3',
+            soundNotOk: 'sounds/notOk.mp3'
+          };
+
+          $compile(el)($s);
         });
       }
     });
