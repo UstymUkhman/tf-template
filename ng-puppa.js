@@ -40,51 +40,52 @@
 angular.module('ng.puppa',[])
   .directive('ngPuppa', function ($http, $templateCache, $compile) {
 
-  return {
-    restrict: 'A',
-    require: 'ngModel',
-    link: function(scope, elm, attrs, ctrl) {
-      var objExpr = '', 
-          validateExpr = scope.$eval(attrs.ngPuppa),
-          
-          opts = scope.ngPuppaOpts || scope.$eval(attrs.ngPuppaOpts) ||
-                 {opr: '||', ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'},
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function(scope, elm, attrs, ctrl) {
+        var objExpr = '',
+            validateExpr = attrs.ngPuppa,
 
-          checkSounds = function(opts) {
-            var attrs = [];
+            opts = scope.ngPuppaOpts || scope.$eval(attrs.ngPuppaOpts) ||
+                   {opr: '||', ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'},
 
-            for (var key in opts) {
-              if (typeof opts[key] === 'string')
-                attrs[key] = opts[key];
-              else if (typeof opts[key] === 'object' && opts[key].tagName === 'AUDIO')
-                attrs[key] = opts[key].src;
-            }
+            checkSounds = function(opts) {
+              var attrs = [];
 
-            return attrs;
-          },
+              for (var key in opts) {
+                if (typeof opts[key] === 'string')
+                  attrs[key] = opts[key];
+                else if (typeof opts[key] === 'object' && opts[key].tagName === 'AUDIO')
+                  attrs[key] = opts[key].src;
+              }
 
-          compileTplURL = function(tpl) {
-            $http.get(tpl, {cache: $templateCache}).success(function(tplContent){
-              elm.replaceWith($compile(tplContent)(scope));                
-            });
-          };
+              return attrs;
+            },
 
-      if (!validateExpr) return;
-      if (typeof opts.opr !== 'string') opts.opr = '||';
+            compileTplURL = function(tpl) {
+              $http.get(tpl, {cache: $templateCache}).success(function(tplContent){
+                elm.replaceWith($compile(tplContent)(scope));                
+              });
+            };
 
-      angular.forEach(validateExpr, function (expr, key) {
-        var conditions = validateExpr.length - 1;
-        objExpr += expr+' ';
-        if (key < conditions) objExpr += opts.opr+' ';
-      });
+        if (validateExpr === '') return;
+        validateExpr = scope.$eval(validateExpr);
+        if (typeof opts.opr !== 'string') opts.opr = '||';
 
-      var sounds = checkSounds({ok: opts.soundOk, notOk: opts.soundNotOk});
-      var resp = scope.$eval(!objExpr ? validateExpr : objExpr);
-      new Audio(resp ? sounds.ok : sounds.notOk).play();
-      compileTplURL(resp ? opts.ok : opts.notOk);
-      return resp;
-    }
-  };
+        angular.forEach(validateExpr, function (expr, key) {
+          var conditions = validateExpr.length - 1;
+          objExpr += expr+' ';
+          if (key < conditions) objExpr += opts.opr+' ';
+        });
+
+        var sounds = checkSounds({ok: opts.soundOk, notOk: opts.soundNotOk});
+        var resp = !objExpr ? validateExpr : scope.$eval(objExpr);
+        new Audio(resp ? sounds.ok : sounds.notOk).play();
+        compileTplURL(resp ? opts.ok : opts.notOk);
+        return resp;
+      }
+    };
   });
 
 }());
