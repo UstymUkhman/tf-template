@@ -8,7 +8,6 @@
     .controller('directiveController', function($scope) {
       $scope.valid = null;
       $scope.ngPuppaOpts = {
-        opr: '&&',
         ok: 'tpl/ok.tpl',
         notOk: 'tpl/notOk.tpl',
         soundOk: 'sounds/ok.mp3',

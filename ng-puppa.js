@@ -38,7 +38,7 @@
  * all validators in ngModel.$validators reports as valid.
  */
 angular.module('ng.puppa',[])
-  .directive('ngPuppa', function () {
+  .directive('ngPuppa', function ($http, $templateCache, $compile) {
 
   return {
     restrict: 'A',
@@ -46,10 +46,31 @@ angular.module('ng.puppa',[])
     link: function(scope, elm, attrs, ctrl) {
       var objExpr = '', 
           validateExpr = scope.$eval(attrs.ngPuppa),
-          opts = scope.ngPuppaOpts || attrs.ngPuppaOpts ||
-                 {opr: '||', ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'};
+          
+          opts = scope.ngPuppaOpts || scope.$eval(attrs.ngPuppaOpts) ||
+                 {opr: '||', ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'},
+
+          checkSounds = function(opts) {
+            var attrs = [];
+
+            for (var key in opts) {
+              if (typeof opts[key] === 'string')
+                attrs[key] = opts[key];
+              else if (typeof opts[key] === 'object' && opts[key].tagName === 'AUDIO')
+                attrs[key] = opts[key].src;
+            }
+
+            return attrs;
+          },
+
+          compileTplURL = function(tpl) {
+            $http.get(tpl, {cache: $templateCache}).success(function(tplContent){
+              elm.replaceWith($compile(tplContent)(scope));                
+            });
+          };
 
       if (!validateExpr) return;
+      if (typeof opts.opr !== 'string') opts.opr = '||';
 
       angular.forEach(validateExpr, function (expr, key) {
         var conditions = validateExpr.length - 1;
@@ -57,7 +78,11 @@ angular.module('ng.puppa',[])
         if (key < conditions) objExpr += opts.opr+' ';
       });
 
-      return scope.$eval(!objExpr ? validateExpr : objExpr);
+      var sounds = checkSounds({ok: opts.soundOk, notOk: opts.soundNotOk});
+      var resp = scope.$eval(!objExpr ? validateExpr : objExpr);
+      new Audio(resp ? sounds.ok : sounds.notOk).play();
+      compileTplURL(resp ? opts.ok : opts.notOk);
+      return resp;
     }
   };
   });
