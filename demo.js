@@ -8,7 +8,7 @@
     .controller('directiveController', function($scope) {
       $scope.valid    = null;
       $scope.validate = ''; // [false, true, $scope.valid];
-      $scope.submit   = document.getElementById('submit');
+      $scope.submit   = document.getElementById('response');
 
       $scope.validateToPuppa = function() {
         var el = angular.element($scope.submit);

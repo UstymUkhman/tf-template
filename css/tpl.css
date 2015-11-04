@@ -1,0 +1,10 @@
+div #alert {
+  border-radius: 5px;
+  width:         10%;
+  top:           -350px;
+  margin:        0 auto;
+  text-align:    center;
+  position:      relative;
+  padding:       10px 25px;
+  border:        solid #000 3px;
+}

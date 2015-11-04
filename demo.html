@@ -25,10 +25,8 @@
 
     <div id="action" ng-controller="directiveController">
       <input type="text" value="I want to be rich." />
-      <button id="submit"
-              ng-puppa="validate"
-              ng-click="validateToPuppa()"
-              ng-puppa-opts="{ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'}">Submit</button>
+      <button id="submit" ng-click="validateToPuppa()">Submit</button>
+      <div id="response" ng-puppa="validate" ng-puppa-opts="{ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'}"></div>
     </div>
   </div>
 </body>

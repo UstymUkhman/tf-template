@@ -81,7 +81,7 @@ angular.module('ng.puppa',[])
 
         var sounds = checkSounds({ok: opts.soundOk, notOk: opts.soundNotOk});
         var resp = !objExpr ? validateExpr : scope.$eval(objExpr);
-        new Audio(resp ? sounds.ok : sounds.notOk).play();
+        new Audio(resp ? sounds.ok : sounds.notOk);//.play();
         compileTplURL(resp ? opts.ok : opts.notOk);
         return resp;
       }
