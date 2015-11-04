@@ -6,17 +6,18 @@
     })
 
     .controller('directiveController', function($scope) {
+      $scope.validate = '';
       $scope.valid    = null;
-      $scope.validate = ''; // [false, true, $scope.valid];
       $scope.submit   = document.getElementById('response');
 
       $scope.validateToPuppa = function() {
         var el = angular.element($scope.submit);
+
         $s = el.scope();
         $injector = el.injector();
         $injector.invoke(function($compile) {
-          $s.validate = [false, true, $scope.valid];
-          $scope.ngPuppaOpts = {
+          $s.validate = true; // [false, true, $scope.valid];
+          $s.ngPuppaOpts = {
             opr: '&&',
             ok: 'tpl/ok.tpl',
             notOk: 'tpl/notOk.tpl',
@@ -25,7 +26,17 @@
           };
 
           $compile(el)($s);
+          document.getElementsByTagName('body')[0].className = 'dack-theme';
         });
       }
     });
+
+  document.addEventListener('click', function() {
+    var alert = document.getElementById('alert');
+
+    if (alert) {
+      alert.className = 'animated bounceOutUp';
+      document.getElementsByTagName('body')[0].className  = '';
+    }
+  });
 })();

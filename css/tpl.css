@@ -8,3 +8,9 @@ div #alert {
   padding:       10px 25px;
   border:        solid #000 3px;
 }
+
+.dack-theme:not(#alert) {
+  opacity:          .3;
+  background-image: none;
+  background-color: rgba(0,0,0,0.75);
+}

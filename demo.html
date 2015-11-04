@@ -4,7 +4,8 @@
 	<title>AngularJS ng-p.u.pp.a</title>
 
   <link rel="stylesheet" type="text/css" href="main.css">
-  <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href='https://fonts.googleapis.com/css?family=Roboto:300'>
+  <link rel="stylesheet" type="text/css" href="https://rawgit.com/daneden/animate.css/master/animate.min.css">
   
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
   <script src="ng-puppa.js"></script>
@@ -26,7 +27,10 @@
     <div id="action" ng-controller="directiveController">
       <input type="text" value="I want to be rich." />
       <button id="submit" ng-click="validateToPuppa()">Submit</button>
-      <div id="response" ng-puppa="validate" ng-puppa-opts="{ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'}"></div>
+      <div id="response"
+           ng-puppa="validate"
+           ng-puppa-opts="{ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'}">
+      </div>
     </div>
   </div>
 </body>

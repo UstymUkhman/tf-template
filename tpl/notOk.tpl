@@ -12,6 +12,6 @@
   }
 </style>
 
-<div id="alert">
+<div id="alert" class="animated bounceInDown">
 	<span>Puuuppa!</span>
 </div>
