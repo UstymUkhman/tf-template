@@ -54,3 +54,9 @@ div #action button {
   background-color: transparent;
   border:           solid #000 2px;
 }
+
+.dark-theme {
+  opacity:          .3;
+  background-image: none;
+  background-color: rgba(0,0,0,0.75);
+}

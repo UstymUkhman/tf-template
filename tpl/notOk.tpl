@@ -1,14 +1,15 @@
 <link rel="stylesheet" type="text/css" href="css/tpl.css">
 <style type="text/css">
-	#alert {
-	  background-color: #FF1111;
-    font-weight: bold;
-    font-color: #fff;
-    font-size: 25px;
-	}
+  #alert {
+    background-color: #FF1111;
+  }
 
   #alert span {
-    color: #fff;
+    font-style:  normal;
+    font-weight: bold;
+    font-color:  #fff;
+    font-size:   25px;
+    color:       #fff;
   }
 </style>
 

@@ -9,19 +9,19 @@
 (function () {
 'use strict';
 /**
- * General-purpose validator for ngModel.
- * angular.js comes with several built-in validation mechanism for input fields (ngRequired, ngPattern etc.) but using
- * an arbitrary validation function requires creation of custom directives for interact with angular's validation mechanism.
- * The ui-validate directive makes it easy to use any function(s) defined in scope as a validator function(s).
- * A validator function will trigger validation on both model and input changes.
+ * General-purpose AngularJS directive validator.
+ * angular.js comes with several built-in validation mechanism for input fields (ngRequired, ngPattern etc.), however, by using this directive
+ * it's possible to handle both validation outcome (true or false) by specifying a custom template for each of results (or just for one of them).
+ * The ng-puppa directive makes it easy to use any variable(s) defined in scope as a validator variable(s).
+ * A validator variable will trigger directive's validation process every time the variable(s) changes.
  *
- * This utility bring 'ui-validate' directives to handle regular validations and 'ui-validate-async' for asynchronous validations.
+ * This utility bring 'ng-puppa' directives to handle regular validations.
  *
- * @example <input ui-validate=" 'myValidatorFunction($value)' ">
- * @example <input ui-validate="{ foo : '$value > anotherModel', bar : 'validateFoo($value)' }">
- * @example <input ui-validate="{ foo : '$value > anotherModel' }" ui-validate-watch=" 'anotherModel' ">
- * @example <input ui-validate="{ foo : '$value > anotherModel', bar : 'validateFoo($value)' }" ui-validate-watch=" { foo : 'anotherModel' } ">
- * @example <input ui-validate-async=" 'myAsyncValidatorFunction($value)' ">
+ * @example <div ng-puppa="false"></div> --> @param - boolean variable
+ * @example <div ng-puppa="puppa"></div> --> @param puppa {boolean|number|string} - $scope variable
+ * @example <div ng-puppa="[puppa, puppMelo]"></div> --> @param {boolean[]} - array of boolean variables
+ * @example <div ng-puppa="puppa"></div> -->
+ * @example <div ng-puppa="puppa"></div> -->
  * @example <input ui-validate-async="{ foo: 'myAsyncValidatorFunction($value, anotherModel)' }" ui-validate-watch=" 'anotherModel' ">
  *
  * @param ui-validate {string|object literal} If strings is passed it should be a scope's function to be used as a validator.

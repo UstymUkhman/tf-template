@@ -16,7 +16,7 @@
         $s = el.scope();
         $injector = el.injector();
         $injector.invoke(function($compile) {
-          $s.validate = true; // [false, true, $scope.valid];
+          $s.validate = [false, true, $scope.valid];
           $s.ngPuppaOpts = {
             opr: '&&',
             ok: 'tpl/ok.tpl',
@@ -26,17 +26,12 @@
           };
 
           $compile(el)($s);
-          document.getElementsByTagName('body')[0].className = 'dack-theme';
         });
       }
     });
 
   document.addEventListener('click', function() {
     var alert = document.getElementById('alert');
-
-    if (alert) {
-      alert.className = 'animated bounceOutUp';
-      document.getElementsByTagName('body')[0].className  = '';
-    }
+    if (alert) alert.className = 'animated bounceOutUp';
   });
 })();
