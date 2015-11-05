@@ -17,19 +17,21 @@
  *
  * This utility bring 'ng-puppa' directives to handle regular validations.
  *
- * @example <div ng-puppa="false"></div> --> @param - boolean variable
- * @example <div ng-puppa="puppa"></div> --> @param puppa {boolean|number|string} - $scope variable
- * @example <div ng-puppa="[puppa, puppMelo]"></div> --> @param {boolean[]} - array of boolean variables
- * @example <div ng-puppa="puppa"></div> -->
- * @example <div ng-puppa="puppa"></div> -->
- * @example <input ui-validate-async="{ foo: 'myAsyncValidatorFunction($value, anotherModel)' }" ui-validate-watch=" 'anotherModel' ">
+ * @example <div ng-puppa="puppa"></div>                              --> @param puppa {boolean|number|string}        - $scope variable
+ * @example <div ng-puppa="[puppa, puppMelo]"></div>                  --> @param {boolean[]}                          - array of boolean variables
+ * @example <div ng-puppa="puppa" ng-puppa-opts="puppaOptions"></div> --> @param puppa        {boolean|number|string} - $scope variable
+ *                                                                        @param puppaOptions {Object}                - $scope variable   
+ * 
+ * @param ng-puppa {boolean|number|string} Each variable passed to 'ng-puppa' will be first parsed to its boolean corresponding value and,
+ * after its evaluation, the final value (true/false) will trigger one two possible template files (specified in ng-puppa-opts) to replace
+ * directive's <tag> element with the HTML of the chosen template. You can develop your personal templates and specify their relative path
+ * in an object passed to 'ng-puppa-opts' attribute which requires to be implemented in the same <tag> of 'ng-puppa' attribute.
  *
- * @param ui-validate {string|object literal} If strings is passed it should be a scope's function to be used as a validator.
- * If an object literal is passed a key denotes a validation error key while a value should be a validator function.
- * In both cases validator function should take a value to validate as its argument and should return true/false indicating a validation result.
- * It is possible for a validator function to return a promise, however promises are better handled by ui-validate-async.
+ * @param ng-puppa {boolean[]|number[]|string[]} 'ng-puppa' also accepts an array of values (even with mixed types); it will evaluate each
+ * element to its boolean value and then it will create an array of booleans. The final result for ng-puppa will be the join of each value
+ * of this array.
  *
- * @param ui-validate-async {string|object literal} If strings is passed it should be a scope's function to be used as a validator.
+ * @param ng-puppa {string|object literal} If strings is passed it should be a scope's function to be used as a validator.
  * If an object literal is passed a key denotes a validation error key while a value should be a validator function.
  * Async validator function should take a value to validate as its argument and should return a promise that resolves if valid and reject if not,
  * indicating a validation result.
@@ -81,7 +83,7 @@ angular.module('ng.puppa',[])
 
         var sounds = checkSounds({ok: opts.soundOk, notOk: opts.soundNotOk});
         var resp = !objExpr ? validateExpr : scope.$eval(objExpr);
-        new Audio(resp ? sounds.ok : sounds.notOk);//.play();
+        new Audio(resp ? sounds.ok : sounds.notOk).play();
         compileTplURL(resp ? opts.ok : opts.notOk);
         return resp;
       }
