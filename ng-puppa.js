@@ -59,8 +59,8 @@ angular.module('ng.puppa',[])
               },
 
               compileTplURL = function(tpl) {
-                $http.get(tpl, {cache: $templateCache}).success(function(tplContent){
-                  elm.replaceWith($compile(tplContent)(scope));                
+                $http.get(tpl, {cache: $templateCache}).success(function(tplContent) {
+                  elm.html($compile(tplContent)(scope).html());
                 });
               };
 
@@ -97,7 +97,7 @@ angular.module('ng.puppa',[])
 
       var sounds = sound({ok: opts.soundOk, notOk: opts.soundNotOk});
       var resp = !objExpr ? validateExpr : scope.$eval(objExpr);
-      new Audio(resp ? sounds.ok : sounds.notOk);//.play();
+      new Audio(resp ? sounds.ok : sounds.notOk).play();
       compileTpl(resp ? opts.ok : opts.notOk);
       return resp;
     };

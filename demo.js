@@ -1,68 +1,51 @@
 (function() {
 	angular.module('demo', ['ng.puppa'])
-    .controller('directiveController', function($scope) {
+    .controller('directiveController', function($scope, getCustomOpts, getRandBool) {
 
-      // Make a factory:
-      $scope.getRandBool = function() {
-        switch (parseInt(Math.random()*3)) {
-          case 0: return false;
-          case 1: return true;
-          case 2: return null;
-        }
-      };
-
-      // Make a factory:
-      $scope.getCustomOpts = function() {
-
-      };
 
       $scope.valid        = '';
+      $scope.validate     = { 'OK': true,
+                              '!OK': [false, true, getRandBool()],
+                              'Custom': getRandBool()};
+
       $scope.responces    = ['OK', '!OK', 'Custom'];
+      $scope.validOpts    = { };
       $scope.selectedResp = $scope.responces[1];
 
-      $scope.validate     = { 'OK': true,
-                              '!OK': [false, true, $scope.getRandBool()],
-                              'Custom': $scope.getRandBool()};
-
-      $scope.validateOpts = { 'OK': { },
+      $scope.validateOpts = { 'OK': {ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'},
                               '!OK': {opr: '&&', ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'},
-                              'Custom': $scope.getCustomOpts()};
+                              'Custom': getCustomOpts()};
 
-
-
-      $scope.setResponse = function(value) {
-        $scope.valid = $scope.validate[value];
+      $scope.validateToPuppa = function(value) {
+        $scope.valid     = $scope.validate[value];
+        $scope.validOpts = $scope.validateOpts[value];
+        // debugger;
       };
+  })
 
-      /*$scope.validateToPuppa = function() {
-        $scope.validate = ;
-        $scope.ngPuppaOpts = {
-          opr: '&&',
-          ok: 'tpl/ok.tpl',
-          notOk: 'tpl/notOk.tpl',
-          soundOk: 'sounds/ok.mp3',
-          soundNotOk: 'sounds/notOk.mp3'
-        };
-      };*/
+  // You can setup here your a logical operator to use in 'ng-puppa'
+  // and your custom templates and sounds to try this demo to the best
+  .factory('getCustomOpts', function() {
+    return function() {
+      return {
+        opr:        '==',
+        ok:         'tpl/ok.tpl',
+        notOk:      'tpl/notOk.tpl',
+        soundOk:    'sounds/ok.mp3',
+        soundNotOk: 'sounds/notOk.mp3'        
+      };
+    };
+  })
 
-      /*$scope.validateToPuppa = function() {
-        var el = angular.element($scope.submit);
-
-        $s = el.scope();
-        $injector = el.injector();
-        $injector.invoke(function($compile) {
-          $s.validate = [false, true, $scope.valid];
-          $s.ngPuppaOpts = {
-            opr: '&&',
-            ok: 'tpl/ok.tpl',
-            notOk: 'tpl/notOk.tpl',
-            soundOk: 'sounds/ok.mp3',
-            soundNotOk: 'sounds/notOk.mp3'
-          };
-
-          $compile(el)($s);
-        });
-      }*/
+  // Just because
+  .factory('getRandBool', function() {
+    return function() {
+      switch (parseInt(Math.random()*3)) {
+        case 0: return false;
+        case 1: return  true;
+        case 2: return  null;
+      }
+    };
   });
 
   document.addEventListener('click', function() {
