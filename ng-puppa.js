@@ -50,7 +50,7 @@ angular.module('ng.puppa',[])
           var checkSounds = function(opts) {
                 var attrs = [];
                 for (var key in opts) {
-                  if (typeof opts[key] === 'string')
+                  if (typeof opts[key] === 'string' && opts[key].length)
                     attrs[key] = opts[key];
                   else if (typeof opts[key] === 'object' && opts[key].tagName === 'AUDIO')
                     attrs[key] = opts[key].src;
