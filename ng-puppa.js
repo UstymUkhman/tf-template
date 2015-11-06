@@ -29,65 +29,78 @@
  *
  * @param ng-puppa {boolean[]|number[]|string[]} 'ng-puppa' also accepts an array of values (even with mixed types); it will evaluate each
  * element to its boolean value and then it will create an array of booleans. The final result for ng-puppa will be the join of each value
- * of this array.
+ * of this array by using a logical operator.
  *
- * @param ng-puppa {string|object literal} If strings is passed it should be a scope's function to be used as a validator.
- * If an object literal is passed a key denotes a validation error key while a value should be a validator function.
- * Async validator function should take a value to validate as its argument and should return a promise that resolves if valid and reject if not,
- * indicating a validation result.
- * ui-validate-async supports non asyncronous validators. They are wrapped into a promise. Although is recomented to use ui-validate instead, since
- * all validations declared in ui-validate-async are registered un ngModel.$asyncValidators that runs after ngModel.$validators if and only if
- * all validators in ngModel.$validators reports as valid.
+ * @param ng-puppa-opts {Object} Each attribute of this object is optional because main of them have default values assigned by the directive.
+ * This is how 'ng-puppa-opts' is structured:
+ *
+ * opr        {string} - operator used to join the eventual array of values passed to 'ng-puppa' ['OR' operator (||) is the default one]
+ * ok         {string} - absolute or relative path to a template file if 'ng-puppa' returns true; 'tpl/ok.tpl' is the default one, you can change or override it
+ * notOk      {string} - absolute or relative path to a template file if 'ng-puppa' returns false; 'tpl/notOk.tpl' is the default one, you can change or override it
+ * soundOk    {string} - absolute or relative path to an audio file if 'ng-puppa' returns true
+ * soundNotOk {string} - absolute or relative path to an audio file if 'ng-puppa' returns false
  */
 angular.module('ng.puppa',[])
-  .directive('ngPuppa', function ($http, $templateCache, $compile) {
+  .directive('ngPuppa', ['$http', '$templateCache', '$compile', '$$ngPuppaWatcher',
+    function ($http, $templateCache, $compile, $$ngPuppaWatcher) {
 
-    return {
-      restrict: 'A',
-      link: function(scope, elm, attrs, ctrl) {
-        var objExpr = '',
-            validateExpr = (attrs.ngPuppa === '')
-                         ? attrs.ngPuppa
-                         : scope.$eval(attrs.ngPuppa),
+      return {
+        restrict: 'A',
+        link: function(scope, elm, attrs, ctrl) {
+          var checkSounds = function(opts) {
+                var attrs = [];
+                for (var key in opts) {
+                  if (typeof opts[key] === 'string')
+                    attrs[key] = opts[key];
+                  else if (typeof opts[key] === 'object' && opts[key].tagName === 'AUDIO')
+                    attrs[key] = opts[key].src;
+                }
+                return attrs;
+              },
 
-            opts = scope.ngPuppaOpts || scope.$eval(attrs.ngPuppaOpts) ||
-                   {opr: '||', ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'},
+              compileTplURL = function(tpl) {
+                $http.get(tpl, {cache: $templateCache}).success(function(tplContent){
+                  elm.replaceWith($compile(tplContent)(scope));                
+                });
+              };
 
-            checkSounds = function(opts) {
-              var attrs = [];
+          scope.$watch(attrs.ngPuppa, function() {
+            $$ngPuppaWatcher(scope, attrs, checkSounds, compileTplURL);
+          });
 
-              for (var key in opts) {
-                if (typeof opts[key] === 'string')
-                  attrs[key] = opts[key];
-                else if (typeof opts[key] === 'object' && opts[key].tagName === 'AUDIO')
-                  attrs[key] = opts[key].src;
-              }
+          scope.$watch(attrs.ngPuppaOpts, function() {
+            $$ngPuppaWatcher(scope, attrs, checkSounds, compileTplURL);
+          });
+        }
+      };
+    }
+  ])
 
-              return attrs;
-            },
+  .service('$$ngPuppaWatcher', function () {
+    return function (scope, attrs, sound, compileTpl) {
+      var validateExpr = (attrs.ngPuppa === '')
+                       ? attrs.ngPuppa
+                       : scope.$eval(attrs.ngPuppa),
 
-            compileTplURL = function(tpl) {
-              $http.get(tpl, {cache: $templateCache}).success(function(tplContent){
-                elm.replaceWith($compile(tplContent)(scope));                
-              });
-            };
+               objExpr = '',
+                  opts = scope.ngPuppaOpts || scope.$eval(attrs.ngPuppaOpts) ||
+                   {opr: '||', ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'};
 
-        if (validateExpr === '') return;
-        if (typeof opts.opr !== 'string') opts.opr = '||';
+      if (validateExpr === '') return;
+      if (typeof opts.opr !== 'string') opts.opr = '||';
 
-        angular.forEach(validateExpr, function (expr, key) {
-          var conditions = validateExpr.length - 1;
-          objExpr += expr+' ';
-          if (key < conditions) objExpr += opts.opr+' ';
-        });
+      angular.forEach(validateExpr, function (expr, key) {
+        var conditions = validateExpr.length - 1;
+        objExpr += expr+' ';
+        if (key < conditions) objExpr += opts.opr+' ';
+      });
 
-        var sounds = checkSounds({ok: opts.soundOk, notOk: opts.soundNotOk});
-        var resp = !objExpr ? validateExpr : scope.$eval(objExpr);
-        new Audio(resp ? sounds.ok : sounds.notOk).play();
-        compileTplURL(resp ? opts.ok : opts.notOk);
-        return resp;
-      }
+      var sounds = sound({ok: opts.soundOk, notOk: opts.soundNotOk});
+      var resp = !objExpr ? validateExpr : scope.$eval(objExpr);
+      new Audio(resp ? sounds.ok : sounds.notOk);//.play();
+      compileTpl(resp ? opts.ok : opts.notOk);
+      return resp;
     };
-  });
+  })
 
 }());

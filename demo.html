@@ -13,22 +13,20 @@
 </head>
 <body>
   <div id="demo" ng-app="demo">
-    <div ng-controller="responseController">
+    <div id="action" ng-controller="directiveController">
       <h3>Set a response and try to submit something.</h3>
       <div id="set-response">
         <span>Response:</span>
         <select ng-model="selectedResp"
                 ng-change="setResponse(selectedResp)"
                 ng-options="resp for resp in responces">
-      </select>
+        </select>
       </div>
-    </div>
 
-    <div id="action" ng-controller="directiveController">
       <input type="text" value="I want to be rich." />
       <button id="submit" ng-click="validateToPuppa()">Submit</button>
       <div id="response"
-           ng-puppa="validate"
+           ng-puppa="valid"
            ng-puppa-opts="{ok: 'tpl/ok.tpl', notOk: 'tpl/notOk.tpl'}">
       </div>
     </div>
