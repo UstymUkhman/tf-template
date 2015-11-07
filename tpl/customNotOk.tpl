@@ -2,11 +2,11 @@
   <style type="text/css">
     #mssg {
       border-radius:    0px;
-      width:            10%;
-      top:              -150px;
+      width:            12%;
+      top:              -250px;
       margin:           0 auto;
       text-align:       center;
-      background-color: #FF6F00;
+      background-color: #FF4F00;
       position:         relative;
       padding:          10px 25px;
       border:           solid #00D500 1px;
@@ -14,6 +14,7 @@
     }
 
     #mssg span {
+      font-weight: bold;
       font-size:   20px;
       color:       #000;
     }
