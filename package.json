@@ -11,8 +11,8 @@
     "angular": ">= 1.4.7"
   },
   "devDependencies": {
-    "ok-template": "ok.tpl",
-    "notOk-template": "notOk.tpl"
+    "ok-template": "./tpl/ok.tpl",
+    "notOk-template": "./tpl/notOk.tpl"
   },
   "scripts": {
     "demo": "./src/demo.js"

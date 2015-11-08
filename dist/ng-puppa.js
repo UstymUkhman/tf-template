@@ -6,21 +6,22 @@
  */
 
 
-(function () {
+;(function () {
 'use strict';
+
 /**
  * General-purpose AngularJS directive validator.
+ *
  * angular.js comes with several built-in validation mechanism for input fields (ngRequired, ngPattern etc.), however, by using this directive
  * it's possible to handle both validation outcome (true or false) by specifying a custom template for each of results (or just for one of them).
- * The ng-puppa directive makes it easy to use any variable(s) defined in scope as a validator variable(s).
- * A validator variable will trigger directive's validation process every time the variable(s) changes.
- *
+ * The ng-puppa directive makes it easy to use any variable(s) defined in scope as a validator variable(s). A validator variable will trigger
+ * directive's validation process every time the variable(s) changes.
  * This utility bring 'ng-puppa' directives to handle regular validations.
  *
  * @example <div ng-puppa="puppa"></div>                              --> @param puppa {boolean|number|string}        - $scope variable
  * @example <div ng-puppa="[puppa, puppMelo]"></div>                  --> @param {boolean[]}                          - array of boolean variables
  * @example <div ng-puppa="puppa" ng-puppa-opts="puppaOptions"></div> --> @param puppa        {boolean|number|string} - $scope variable
- *                                                                        @param puppaOptions {Object}                - $scope variable   
+ *                                                                        @param puppaOptions {Object}                - $scope variable
  * 
  * @param ng-puppa {boolean|number|string} Each variable passed to 'ng-puppa' will be first parsed to its boolean corresponding value and,
  * after its evaluation, the final value (true/false) will trigger one two possible template files (specified in ng-puppa-opts) to replace
@@ -40,6 +41,7 @@
  * soundOk    {string} - absolute or relative path to an audio file if 'ng-puppa' returns true
  * soundNotOk {string} - absolute or relative path to an audio file if 'ng-puppa' returns false
  */
+
 angular.module('ng.puppa',[])
   .directive('ngPuppa', ['$http', '$templateCache', '$compile', '$$ngPuppaWatcher',
     function ($http, $templateCache, $compile, $$ngPuppaWatcher) {
@@ -48,21 +50,21 @@ angular.module('ng.puppa',[])
         restrict: 'A',
         link: function(scope, elm, attrs, ctrl) {
           var checkSounds = function(opts) {
-                var attrs = [];
-                for (var key in opts) {
-                  if (typeof opts[key] === 'string' && opts[key].length)
-                    attrs[key] = opts[key];
-                  else if (typeof opts[key] === 'object' && opts[key].tagName === 'AUDIO')
-                    attrs[key] = opts[key].src;
-                }
-                return attrs;
-              },
+            var attrs = [];
+            for (var key in opts) {
+              if (typeof opts[key] === 'string' && opts[key].length)
+                attrs[key] = opts[key];
+              else if (typeof opts[key] === 'object' && opts[key].tagName === 'AUDIO')
+                attrs[key] = opts[key].src;
+            }
+            return attrs;
+          },
 
-              compileTplURL = function(tpl) {
-                $http.get(tpl, {cache: $templateCache}).success(function(tplContent) {
-                  elm.html($compile(tplContent)(scope).html());
-                });
-              };
+          compileTplURL = function(tpl) {
+            $http.get(tpl, {cache: $templateCache}).success(function(tplContent) {
+              elm.html($compile(tplContent)(scope).html());
+            });
+          };
 
           scope.$watch(attrs.ngPuppa, function() {
             $$ngPuppaWatcher(scope, attrs, checkSounds, compileTplURL);
@@ -78,6 +80,7 @@ angular.module('ng.puppa',[])
 
   .service('$$ngPuppaWatcher', function () {
     return function (scope, attrs, sound, compileTpl) {
+
       var validateExpr = (attrs.ngPuppa === '')
                        ? attrs.ngPuppa
                        : scope.$eval(attrs.ngPuppa),
@@ -90,9 +93,8 @@ angular.module('ng.puppa',[])
       if (typeof opts.opr !== 'string') opts.opr = '||';
 
       angular.forEach(validateExpr, function (expr, key) {
-        var conditions = validateExpr.length - 1;
         objExpr += expr+' ';
-        if (key < conditions) objExpr += opts.opr+' ';
+        if (key < validateExpr.length - 1) objExpr += opts.opr+' ';
       });
 
       var sounds = sound({ok: opts.soundOk, notOk: opts.soundNotOk});
