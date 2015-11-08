@@ -19,7 +19,7 @@
                               'Custom': getCustomOpts()};
 
       $scope.validateToPuppa = function(value) {
-        // random values update
+        // update with random values
         $scope.validate['!OK'][2] = getRandBool();
         $scope.validate['Custom'] = getRandBool();
 

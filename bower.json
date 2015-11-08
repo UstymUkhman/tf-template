@@ -1,0 +1,14 @@
+{
+  "author": "Ustym Ukhman",
+  "name": "angular-ng-p.u.pp.a",
+  "homepage": "https://github.com/UstymUkhman/ng-p.u.pp.a",
+  "main": "./dist/ng-puppa.js",
+  "license": "MIT",
+  "dependencies": {
+    "angular": ">= 1.4.7"
+  },
+  "devDependencies": {
+    "ok-template": "ok.tpl",
+    "notOk-template": "notOk.tpl"
+  }
+}
