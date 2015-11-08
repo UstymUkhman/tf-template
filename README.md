@@ -7,12 +7,17 @@ it's possible to handle both validation outcome (true or false) by specifying a 
 The ng-puppa directive makes it easy to use any variable(s) defined in scope as a validator variable(s). A validator variable will trigger
 directive's validation process every time the variable(s) changes.
 
+## Demo
+
+You can test 'ng-p.u.pp.a' [here](http://ustymukhman.github.io/ng-p.u.pp.a/demo.html).
+
+
 ## Requirements
 
 - AngularJS
 
-## Usage
 
+## Usage
 
 You can get it from [Bower](http://bower.io/)
 
