@@ -6,9 +6,5 @@
   "license": "MIT",
   "dependencies": {
     "angular": ">= 1.4.7"
-  },
-  "devDependencies": {
-    "ok-template": "./tpl/ok.tpl",
-    "notOk-template": "./tpl/notOk.tpl"
   }
 }
