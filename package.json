@@ -1,12 +1,12 @@
 {
-  "name": "angular-ng-p.u.pp.a",
+  "name": "angular-tf-template",
   "version": "1.0.0",
-  "author": "https://github.com/UstymUkhman/ng-p.u.pp.a/graphs/contributors",
+  "author": "https://github.com/UstymUkhman/tf-template/graphs/contributors",
   "license": {
     "type": "MIT",
-    "url": "https://github.com/UstymUkhman/ng-p.u.pp.a/blob/master/LICENSE"
+    "url": "https://github.com/UstymUkhman/tf-template/blob/master/LICENSE"
   },
-  "homepage": "https://github.com/UstymUkhman/ng-p.u.pp.a",
+  "homepage": "https://github.com/UstymUkhman/tf-template",
   "dependencies": {
     "angular": ">= 1.4.7"
   },
@@ -17,15 +17,13 @@
   "scripts": {
     "demo": "./src/demo.js"
   },
-  "main": "./dist/ng-puppa.js",
+  "main": "./dist/tf-template.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/UstymUkhman/ng-p.u.pp.a.git"
+    "url": "https://github.com/UstymUkhman/tf-template.git"
   },
   "keywords": [
     "angular",
-    "angular-ng",
-    "ng-p.u.pp.a",
-    "ng-puppa"
+    "tf-template"
   ]
 }

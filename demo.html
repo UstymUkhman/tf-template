@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>AngularJS ng-p.u.pp.a</title>
+	<title>AngularJS tf-template</title>
 
   <link rel="stylesheet" type="text/css" href="./css/demo.css">
   <link rel="stylesheet" type="text/css" href='https://fonts.googleapis.com/css?family=Roboto:300'>
   <link rel="stylesheet" type="text/css" href="https://rawgit.com/daneden/animate.css/master/animate.min.css">
   
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-  <script src="./dist/ng-puppa.js"></script>
+  <script src="./dist/tf-template.js"></script>
   <script src="./src/demo.js"></script>
 </head>
 <body>
@@ -18,12 +18,12 @@
       <div id="set-response">
         <span>Response Type:</span>
         <select ng-model="selectedVal"
-                ng-change="validateToPuppa(selectedVal)"
+                ng-change="validateToTpl(selectedVal)"
                 ng-options="key as key for (key, val) in validate">
         </select>
       </div>
 
-      <div id="response" ng-puppa="valid" ng-puppa-opts="validOpts"></div>
+      <div id="response" tf-template="valid" tf-template-opts="validOpts"></div>
     </div>
   </div>
 

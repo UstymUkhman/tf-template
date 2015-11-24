@@ -15,6 +15,6 @@
   </style>
 
   <div id="alert" class="animated bounceInDown">
-    <span>Puuuppa!</span>
+    <span>Bad Idea!</span>
   </div>
 </div>

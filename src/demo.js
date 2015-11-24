@@ -1,5 +1,5 @@
 (function() {
-	angular.module('demo', ['ng.puppa'])
+	angular.module('demo', ['tf.template'])
     .controller('directiveController', function($scope, getCustomOpts, getRandBool) {
 
       $scope.valid        = '';
@@ -18,7 +18,7 @@
 
                               'Custom': getCustomOpts()};
 
-      $scope.validateToPuppa = function(value) {
+      $scope.validateToTpl = function(value) {
         // update with random values
         $scope.validate['!OK'][2] = getRandBool();
         $scope.validate['Custom'] = getRandBool();
@@ -28,7 +28,7 @@
       };
   })
 
-  // You can setup here your a logical operator to use in 'ng-puppa'
+  // You can setup here your a logical operator to use in 'tf-template'
   // and your custom templates and sounds to try this demo to the best
   .factory('getCustomOpts', function() {
     return function() {
