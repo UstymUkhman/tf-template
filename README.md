@@ -1,4 +1,9 @@
-# tf-template [![GitHub version](https://badge.fury.io/gh/UstymUkhman%2Ftf-template.svg)](https://badge.fury.io/gh/UstymUkhman%2Ftf-template) [![Join the chat at https://gitter.im/angular-ui/ui-validate](https://badges.gitter.im/Join%20Chat.svg)]([![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/UstymUkhman/tf-template?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge))
+# tf-template
+
+[![tf-template version](https://img.shields.io/bower/v/bootstrap.svg)](https://github.com/UstymUkhman/tf-template/blob/master/README.md)
+[![tf-template release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/UstymUkhman/tf-template/tree/master)
+[![tf-template license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/UstymUkhman/tf-template/blob/master/LICENSE)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/UstymUkhman/tf-template?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 AngularJS directive - true/false template loading
 
