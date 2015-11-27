@@ -1,6 +1,6 @@
 # tf-template
 
-[![tf-template version](http://ustymukhman.github.io/img/tf-template-release.svg)](https://github.com/UstymUkhman/tf-template/blob/master/README.md)
+[![tf-template version](https://img.shields.io/badge/bower-v1.0.0-blue.svg)](https://github.com/UstymUkhman/tf-template/blob/master/README.md)
 [![tf-template release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/UstymUkhman/tf-template/tree/master)
 [![tf-template license](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/UstymUkhman/tf-template/blob/master/LICENSE)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/UstymUkhman/tf-template?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
