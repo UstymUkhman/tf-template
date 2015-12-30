@@ -45,6 +45,11 @@ h3 {
   border-color:     #FF3900;
 }
 
+#download {
+  top: 25px;
+  position: relative;
+}
+
 #thanks-to {
   bottom:           1%;
   width:            100%;
