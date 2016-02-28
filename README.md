@@ -14,7 +14,7 @@ directive's validation process every time the variable(s) changes.
 
 ## Demo
 
-You can test 'tf-template' [here](http://ustymukhman.github.io/tf-template/demo.html).
+You can test 'tf-template' [here](http://ustymukhman.github.io/tf-template/index.html).
 
 
 ## Requirements
@@ -34,7 +34,7 @@ Load the script files in your application:
 
 ```html
 <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-<script type="text/javascript" src="bower_components/tf-template/dist/tf-template.min.js"></script>
+<script type="text/javascript" src="bower_components/tf-template/source/tf-template.min.js"></script>
 ```
 
 Add the specific module to your dependencies:
